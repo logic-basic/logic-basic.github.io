@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Wireless
 subtitle:
 description:
-author: John Doe
-language:
+author: dangjiahe
+language: zh_CN 
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://blog.dangjiahe.com/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -41,7 +41,7 @@ highlight:
   enable: true
   line_number: true
   auto_detect: false
-  tab_replace:
+  tab_replace: true
 
 # Category & Tag
 default_category: uncategorized
@@ -63,10 +63,33 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: jekyll-theme-slate
+theme: hexo-theme-yilia
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:git
-  repo:https://github.com/logic-basic/logic-basic.github.io.git
+  type: git
+  repo: https://github.com/logic-basic/logic-basic.github.io.git
+  branch: master
+
+
+favicon: /favicon.png
+
+jsonContent:
+    meta: false
+    pages: false
+    posts:
+        title: true
+        date: true
+        path: true
+        text: false
+        raw: false
+        content: false
+        slug: false
+        updated: false
+        comments: false
+        link: false
+        permalink: false
+        excerpt: false
+        categories: false
+        tags: true
