@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="https://blog.dangjiahe.com">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="dns-prefetch" href="http://blog.dangjiahe.com">
   <title>Wireless</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Wireless">
-<meta property="og:url" content="https://blog.dangjiahe.com/index.html">
+<meta property="og:url" content="http://blog.dangjiahe.com/index.html">
 <meta property="og:site_name" content="Wireless">
+<meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wireless">
   
@@ -32,7 +33,7 @@
   
 
 </head>
-
+</html>
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -42,7 +43,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="https://pic3.zhimg.com/80/v2-e2ae9159cf260da0ae61951bf1926abe_hd.jpg" class="js-avatar">
+			<img src="/touxiang.png" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">dangjiahe</a></h1>
@@ -98,7 +99,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="https://pic3.zhimg.com/80/v2-e2ae9159cf260da0ae61951bf1926abe_hd.jpg" class="js-avatar">
+				<img src="/touxiang.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">dangjiahe</h1>
@@ -145,27 +146,29 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-2st文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-macos程序-最小化弹出和进行一次置顶操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/23/2st文章/">2st文章</a>
+      <a class="article-title" href="/2020/08/21/macos程序-最小化弹出和进行一次置顶操作/">macos程序-最小化弹出和进行一次置顶操作</a>
     </h1>
   
 
         
-        <a href="/2018/03/23/2st文章/" class="archive-article-date">
-  	<time datetime="2018-03-23T05:58:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-23</time>
+        <a href="/2020/08/21/macos程序-最小化弹出和进行一次置顶操作/" class="archive-article-date">
+  	<time datetime="2020-08-21T11:36:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>测试</p>
+        <p>在查找这两个方法的过程中走了很多弯路，特此记录</p>
+<h2 id="把已经最小化的程序弹出"><a href="#把已经最小化的程序弹出" class="headerlink" title="把已经最小化的程序弹出"></a>把已经最小化的程序弹出</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(NSWindow* win in [NSApp windows]) &#123;</span><br><span class="line">    if([win isMiniaturized]) &#123;</span><br><span class="line">        [win deminiaturize:self];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="把已经置于底部的macos程序置于顶层"><a href="#把已经置于底部的macos程序置于顶层" class="headerlink" title="把已经置于底部的macos程序置于顶层"></a>把已经置于底部的macos程序置于顶层</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[NSApp activateIgnoringOtherApps:YES];</span><br><span class="line">[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];</span><br></pre></td></tr></table></figure>
 
       
 
@@ -174,11 +177,883 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macos</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tip</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/23/2st文章/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/08/21/macos程序-最小化弹出和进行一次置顶操作/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-嵌入式coredump调试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/08/嵌入式coredump调试/">嵌入式coredump调试</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/08/嵌入式coredump调试/" class="archive-article-date">
+  	<time datetime="2020-01-08T09:32:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>嵌入式程序奔溃，一般不好定位。不能直接gdb调试。用dmesg结合addr2line呢，有时候根据地址也查不到具体的位置，因为可能最后在so中崩溃。</p>
+<p>为此，如果空间够大，可以开启coredump来生成coredump文件。然后使用gdb来进行调试</p>
+<ol>
+<li>首先开启生成coredump</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;/mnt/sdcard/core-%p-%e.$(date &quot;+%Y%m%d_%H%M%S&quot;)&quot; &gt; /proc/sys/kernel/core_pattern</span><br><span class="line">ulimit -c unlimited</span><br></pre></td></tr></table></figure>
+<p>这样，程序崩溃后,coredump就会生成在生成在/mnt/sdcard目录,如果要放在其他目录,改前面的目录即可</p>
+<ol>
+<li>复现问题，程序奔溃，生成coredump</li>
+</ol>
+<ol>
+<li>使用gdb + coredump文件的方式运行gdb</li>
+</ol>
+<p>这个gdb，必须是交叉编译器附带的gdb，否则可能不识别coredump文件</p>
+<ol>
+<li><p>刚加载coredump文件, 还缺少很多so文件，比如libc.so, libc++so等等, 缺少这些so，我们的堆栈信息是显示不了的。</p>
+</li>
+<li><p>使用<code>info sharedlibrary</code> 来查看缺少哪些库</p>
+</li>
+<li><p>使用<code>set solib-search-path</code> 来添加so的路径</p>
+</li>
+</ol>
+<p>这个路径一般在交叉编译器相关目录，如果有多个目录，则使用;来分隔</p>
+<ol>
+<li>添加完目录之后，既可使用bt来查看崩溃时的堆栈</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">coredump</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/08/嵌入式coredump调试/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-tcpdump使用记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/02/tcpdump使用记录/">tcpdump使用记录</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/02/tcpdump使用记录/" class="archive-article-date">
+  	<time datetime="2019-09-02T11:49:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="指定固定网卡"><a href="#指定固定网卡" class="headerlink" title="指定固定网卡"></a>指定固定网卡</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i xxx</span><br></pre></td></tr></table></figure>
+<h5 id="指定发往目标IP"><a href="#指定发往目标IP" class="headerlink" title="指定发往目标IP"></a>指定发往目标IP</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump dst host xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<h5 id="指定来源IP"><a href="#指定来源IP" class="headerlink" title="指定来源IP"></a>指定来源IP</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump src host xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<h5 id="指定两个主机之间的通信"><a href="#指定两个主机之间的通信" class="headerlink" title="指定两个主机之间的通信"></a>指定两个主机之间的通信</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump ip host xxx.xxx.xxx.xxx and xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<h5 id="保存信息到文件"><a href="#保存信息到文件" class="headerlink" title="保存信息到文件"></a>保存信息到文件</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -w xxx.cap</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/02/tcpdump使用记录/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-编译——交叉编译器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/28/编译——交叉编译器/">编译——交叉编译器</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/28/编译——交叉编译器/" class="archive-article-date">
+  	<time datetime="2019-08-28T03:27:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>有一个很老嵌入式板子, 是arm9的。原厂给的交叉编译器非常老了, 版本是gcc-4.4.4。这个版本是是不支持c++11的，我想把自己写的程序移植上去，就十分困难。因为我自己的程序是使用C++11的。所以，就打算更新交叉编译器，编译一个支持c++11的编译器。</p>
+<h2 id="本机环境"><a href="#本机环境" class="headerlink" title="本机环境"></a>本机环境</h2><p>操作系统: manjaro-deepin<br>gcc: 8.1.1<br>g++: 8.1.1</p>
+<h2 id="下载需要的源码"><a href="#下载需要的源码" class="headerlink" title="下载需要的源码"></a>下载需要的源码</h2><h4 id="Binutils"><a href="#Binutils" class="headerlink" title="Binutils"></a>Binutils</h4><p>Binutils  2.29   37.1 MB    2017/7/24 上午8:00:00</p>
+<p>地址:<br>ftp://ftp.gnu.org/gnu/binutils/binutils-2.29.tar.gz<br>Binutils是GNU工具之一，他包括连接器、汇编器和其他用于目标文件和档案的工具，他是二进制代码的处理维护工具。安装Binutils工具包含的程式有addr2line、ar、as、c++filt、gprof、ld、nm、objcopy、objdump、ranlib、readelf、size、strings、strip、libiberty、libbfd和libopcodes</p>
+<h4 id="Glibc"><a href="#Glibc" class="headerlink" title="Glibc"></a>Glibc</h4><p>glibc 2.20     23.8 MB    2014/9/7 上午8:00:00</p>
+<p>地址:<br>ftp://ftp.gnu.org/gnu/glibc/glibc-2.20.tar.gz</p>
+<p>glibc是gnu发布的libc库，也即c运行库。glibc是linux系统中最底层的api，几乎其它任何的运行库都会倚赖于glibc。<br>需要关注的是，glibc版本和kernel内核版本相关。<br>glibc-2.24以上版本需要内核3.1以上。我们当前的内核版本为2.6.35。所以使用了glibc-2.20</p>
+<p>libc-linuxthreads  2.5  237 kB    2006/10/2 上午8:00:00</p>
+<p>地址:<br>ftp://ftp.gnu.org/gnu/glibc/glibc-linuxthreads-2.5.tar.bz2</p>
+<p>这个glibc-thread下载完成之后，直接解压到glibc的目录即可</p>
+<h4 id="GCC"><a href="#GCC" class="headerlink" title="GCC"></a>GCC</h4><p>gcc 5.4.0  2016/6/3 上午8:00:00</p>
+<p>地址:<br>ftp://ftp.gnu.org/gnu/gcc/gcc-5.4.0/gcc-5.4.0.tar.gz</p>
+<p>gcc是GNU编译器套件（GNU Compiler Collection），它包括了C、C++、Objective-C、Fortran、Java、Ada、Go语言的前端和这些语言的库.<br>我们在这里只使用c/c++的部分.<br>gcc-5.4.0是支持c++11的, 同时支持错误推测。所以选择这个版本</p>
+<h4 id="autoconf-和-automake"><a href="#autoconf-和-automake" class="headerlink" title="autoconf 和 automake"></a>autoconf 和 automake</h4><p>autoconf必须是2.64版本，否则gcc-5.4.0编译会出现问题。过高和过低都不行。<br>automake必须是1.11.1版本，否则gcc-5.4.0编译会出现问题。过高和过低都不行。</p>
+<p>安装完之后，试用一下automake, 看是否报错，如果报错，参考：<br><code>https://blog.csdn.net/rainforest_c/article/details/82722198</code></p>
+<p>这是因为本机的perl版本比较高了，而automake旧版本则用了老语法.</p>
+<p>这一点非常坑, 遇到时候搞了好久. 安装到临时目录后，然后export到当前的path目录 </p>
+<h2 id="开始编译"><a href="#开始编译" class="headerlink" title="开始编译"></a>开始编译</h2><h4 id="编译Binutils"><a href="#编译Binutils" class="headerlink" title="编译Binutils"></a>编译Binutils</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf binutils-2.29.tar.gz</span><br><span class="line">cd binutils-2.29</span><br><span class="line">mkdir build</span><br><span class="line"></span><br><span class="line">../configure --prefix=`pwd`/install --target=arm-sm01-linux-gnueabi --disable-nls --disable-werror --enable-multilib</span><br><span class="line"></span><br><span class="line">make </span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>这个参数比较简单：<br><code>--prefix</code> 安装的目标位置<br><code>--target</code> 目标机器，格式是以<code>-</code>分隔，开头是芯片架构，我们是<code>arm</code>. 然后是制造商，这个可以自己写. 后面的就是操作系统和运行结构<br><code>--disable-nls</code> 禁用本地化支持，应该是和语言翻译相关，不影响</p>
+<h4 id="第一次编译GCC"><a href="#第一次编译GCC" class="headerlink" title="第一次编译GCC"></a>第一次编译GCC</h4><p>为什么是第一次，因为我们开始什么都没有，只能先编译一个最小的支持C语言的编译器。<br>然后用我们的这个C语言的编译器，去编译Glibc，等Glibc编译完成后，才能编译完整的GCC工具链</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf gcc-5.4.0.tar.gz</span><br><span class="line">cd ./gcc-5.4.0</span><br><span class="line">./contrib/download_prerequisites</span><br></pre></td></tr></table></figure>
+<p>在<code>download_prerequisites</code>这个脚本里, 会下载gcc所依赖的其他库。并且在编译gcc的时候，会自动编译。<br>但是，脚本里的下载链接不是很好用，经常下载不了。可以在<code>ftp://ftp.gnu.org/gnu/</code>里找到对应版本，进行替换，或者自己找的替换即可。<br>配置完依赖库之后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line">../configure --build=i686-build_pc-linux-gnu --host=i686-build_pc-linux-gnu --target=arm-sm01-linux-gnueabi --prefix=`pwd`/install  --without-headers --with-newlib --with-tune=arm926ej-s --with-gnu-as --with-gnu-ld --disable-nls --disable-decimal-float --disable-libgomp --enable-multilib --disable-libmudflap --disable-libssp --disable-shared --disable-threads --disable-libstdcxx-pch --disable-libffi  --enable-languages=c --enable-maintainer-mode --disable-bootstrap</span><br><span class="line"></span><br><span class="line">make all-gcc</span><br><span class="line">make install-gcc</span><br><span class="line"></span><br><span class="line">make all-target-libgcc</span><br><span class="line">make install-target-libgcc</span><br></pre></td></tr></table></figure>
+<p>gcc的配置比较复杂，可参考链接<code>https://gcc.gnu.org/install/configure.html</code>。<br>在这里讲一些比较重要的。可能会配错的，也是一些坑。</p>
+<p><code>--without-headers</code> 必须添加，因为我们第一次编译，不使用操作系统头文件，所以关闭该选项<br><code>--with-tune=arm926ej-s</code> 非常重要，因为我们是交叉编译，该选项指定了交叉编译的架构，比如我那个芯片就使用了arm926ej-s。所有的选择，在文档中可查看<br><code>--disable-shared</code> 第一次编译，必须禁止shared，否则，在编译gcc库的时候，libgcc_s.so 依赖glibc，但是这个时候我们glibc还没有编译。静态链接不需要符号实现，所以只能编译静态库。<br><code>--disable-threads</code>  第一次编译，必须禁止, 因为thread需要thread.h, 这个时候还没有内核头文件。<br><code>--enable-maintainer-mode</code> 需要添加，经过采坑，该选项涉及gcc的<code>visibility attribut</code>特性。而该特性在glibc-2.20编译中需要用到</p>
+<p>其他大部分都是关闭特性，在其他的大部分教程中都有提及，就不详细说了</p>
+<h4 id="安装内核头文件"><a href="#安装内核头文件" class="headerlink" title="安装内核头文件"></a>安装内核头文件</h4><p>进入内核的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm CROSS_COMPILE=arm-sm01-linux-gnueabi- INSTALL_HDR_PATH=~/project/new_gcc/header headers_install</span><br></pre></td></tr></table></figure></p>
+<p>INSTALL_HDR_PATH 就是安装目录地址，编译Glibc的时候要用到. 该部分较简单</p>
+<h4 id="编译Glibc"><a href="#编译Glibc" class="headerlink" title="编译Glibc"></a>编译Glibc</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf glibc-2.20.tar.gz</span><br><span class="line">cd glibc-2.20</span><br><span class="line">mkdir build</span><br></pre></td></tr></table></figure>
+<p>然后把下面的内容, 放到config.cache文件中，这个文件可以自己创建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">libc_cv_forced_unwind=yes</span><br><span class="line">libc_cv_c_cleanup=yes</span><br><span class="line">libc_cv_arm_tls=yes</span><br><span class="line">libc_cv_gnu99_inline=yes</span><br></pre></td></tr></table></figure></p>
+<p>之后配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">../configure --build=i686-build_pc-linux-gnu --host=arm-sm01-linux-gnueabi --target=arm-sm01-linux-gnueabi --prefix=`pwd`/install --with-headers=/home/dangjiahe/project/new_gcc/header/include --with-binutils=/home/dangjiahe/project/new_gcc/gcc-5.4.0/build/install/bin --with-tls --with-_thread --enable-sim --enable-nptl --enable-add-ons --disable-profile --cache-file=config.cache --enable-kernel=2.6.35 --without-gd --without-cvs --enable-static --enable-shared</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>其中：<br><code>--with-headers</code> 指定内核安装的地址<br><code>--with-binutils</code> 指定binutils的安装地址<br><code>--enable-kernel</code> 指定内核版本<br><code>--enable-static</code> 必须指定, 否则第二次编译gcc后，会有找不到crti.o的问题</p>
+<p>编译到后面，如果报lgcc找不到，则记录编译出libgcc.a的那个目录，然后再makefile中加入-L${目录}. 再编译即可.</p>
+<h4 id="第二次编译gcc"><a href="#第二次编译gcc" class="headerlink" title="第二次编译gcc"></a>第二次编译gcc</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ./gcc-5.4.0/build</span><br><span class="line">make distclean</span><br><span class="line"></span><br><span class="line">../configure --build=i686-build_pc-linux-gnu --host=i686-build_pc-linux-gnu --target=arm-sm01-linux-gnueabi --prefix=/home/dangjiahe/project/new_gcc/glibc-2.20/build/install_bak --with-tune=arm926ej-s --enable-languages=c,c++ --enable-c99 -enable-long-long --enable-nls --enable-__cxa_atexit --disable-libgomp --with-build-sysroot=/home/dangjiahe/project/new_gcc/glibc-2.20/build/install/ --with-sysroot=/home/dangjiahe/project/new_gcc/glibc-2.20/build/install_bak/sysroot --enable-threads=posix --enable-shared</span><br><span class="line"></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p>配置里:<br><code>--with-build-sysroot</code> 指定的是编译时，依赖的sysroot目录，为glibc的安装目录<br><code>--with-sysroot</code> 指定的是，编译结束后，gcc编译时的sysroot目录，在sysroot目录里要包含/usr/include和/usr/lib. 这样编译出的gcc编译时才不会报错。这两个目录需要用户根据情况自己创建<br><code>--prefix</code> 安装目录，安装目录要指定和glibc相同的安装目录，这样编译结束后，拿给别用，sysroot才能自动找到上面创建的include和lib</p>
+<p>编译完成之后，整理一下，即完成编译，可以跑demo试试</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">编译</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">编译器</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/28/编译——交叉编译器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-使用gdb调试android程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/26/使用gdb调试android程序/">使用gdb调试android程序</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/26/使用gdb调试android程序/" class="archive-article-date">
+  	<time datetime="2019-06-26T02:02:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前有一个jni接口调用java方法，在android程序中出现可卡死的问题。<br>因为接口调用比较频繁，没法通过log来排查问题。这个问题又需要很长时间来复现，所以必须通过现场调试才行。</p>
+<h2 id="gdbserver"><a href="#gdbserver" class="headerlink" title="gdbserver"></a>gdbserver</h2><p>gdbserver 可以attach一个进程。同时可以监听在某一个端口来等待gdb的连接</p>
+<p>在android里面，如果是64位程序，则需要使用gdbserver64</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdbserver64 0.0.0.0:9999 --attach 10952</span><br></pre></td></tr></table></figure>
+<p>如上，就是监听在9999端口，attach 进程号为10952的进程</p>
+<h2 id="gdb调试"><a href="#gdb调试" class="headerlink" title="gdb调试"></a>gdb调试</h2><p>gdbserver监听之后，就可以使用gdb来调试了</p>
+<ol>
+<li><p><code>gdb</code></p>
+</li>
+<li><p><code>target remote 10.10.10.50:9999</code> 端口前面是android程序所在的ip</p>
+</li>
+</ol>
+<p>之后，gdb会加载so等信息</p>
+<ol>
+<li>加载完之后，使用<code>continue</code> 即可继续让程序运行</li>
+</ol>
+<h2 id="保存所有堆栈信息"><a href="#保存所有堆栈信息" class="headerlink" title="保存所有堆栈信息"></a>保存所有堆栈信息</h2><p>想保存堆栈信息时，可以按下ctrl+c . 就可以中断程序运行。</p>
+<p>设置log文件：<br><code>(gdb) set logging file /tmp/log.txt</code></p>
+<p>开始采集log<br><code>(gdb) set logging on</code></p>
+<p>输出所有的线程堆栈<br><code>(gdb) thread apply all bt</code></p>
+<p>关闭log采集<br><code>(gdb) set logging on</code></p>
+<p>之后，退出gdb就可以看到log了</p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>在gdb加载完进程时，可能会出现:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread 1 &quot;eenshare.server&quot; received signal SIG33, Real-time event 33.</span><br></pre></td></tr></table></figure>
+<p>线程会收到33的信号，这个我们可以暂时忽略。直接再按c。继续。直到程序继续运行。不会影响程序运行结果<br>具体为什么会收到33, 这个可能还需要再继续研究.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">调试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">gdb</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/26/使用gdb调试android程序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux下使用dmesg调试程序崩溃" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/22/linux下使用dmesg调试程序崩溃/">linux下使用dmesg调试程序崩溃</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/22/linux下使用dmesg调试程序崩溃/" class="archive-article-date">
+  	<time datetime="2019-06-22T02:46:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="dmesg输出"><a href="#dmesg输出" class="headerlink" title="dmesg输出"></a>dmesg输出</h2><p>dmesg是linux系统中，内核打印输出.<br>我们在内核中使用printk. 或者我们在用户空间写/dev/kmsg，也可以输出到dmesg</p>
+<h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><p>我们编写一个简单的程序main.cpp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 1</span><br><span class="line"> 2 #include &lt;iostream&gt;</span><br><span class="line"> 3</span><br><span class="line"> 4 void func() &#123;</span><br><span class="line"> 5     int *p = nullptr;</span><br><span class="line"> 6     *p = 1;</span><br><span class="line"> 7 &#125;</span><br><span class="line"> 8</span><br><span class="line"> 9 int main() &#123;</span><br><span class="line">10     func();</span><br><span class="line">11</span><br><span class="line">12     return 0;</span><br><span class="line">13 &#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译之后运行</p>
+<p>当我们用户的程序崩溃时，操作系统会在dmesg打印一条信息。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[  194.230017] main[727]: segfault at 0 ip 0000001de200e869 sp 00007ffeb667cb20 error 6 in main[1de200e000+1000]</span><br></pre></td></tr></table></figure>
+<p>其中,<br>ip为 指令寄存器<br>sp为 栈顶的偏移地址</p>
+<p>我们主要通过ip来判断位置，但是，如果我们运行多次，就会发现，ip的值，每次都不一样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[  840.467566] main[752]: segfault at 0 ip 0000009e40290869 sp 00007ffc615c5720 error 6 in main[9e40290000+1000]</span><br><span class="line">[  841.546995] main[765]: segfault at 0 ip 000000430da30869 sp 00007ffc6fb54990 error 6 in main[430da30000+1000]</span><br><span class="line">[  842.570851] main[777]: segfault at 0 ip 000000fc2df61869 sp 00007fff3d5eee50 error 6 in main[fc2df61000+1000]</span><br></pre></td></tr></table></figure></p>
+<p>经过观察，可以发现，每次ip的最后三位都是一样的。同时，我们发现main的后面有一个+1000。<br>我们通过计算可以发现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0x0000009e40290869 % 0x1000 = 0x869</span><br><span class="line">0x000000430da30869 % 0x1000 = 0x869</span><br><span class="line">0x000000fc2df61869 % 0x1000 = 0x869</span><br></pre></td></tr></table></figure></p>
+<p>这个0x869应该就是我们的代码段地址</p>
+<p>使用<code>addr2line -Cfe main 869</code><br>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">func()</span><br><span class="line">/home/dangjiahe/main.cpp:6</span><br></pre></td></tr></table></figure></p>
+<p>至此，我们可以定位到程序具体的崩溃位置，第二行，需要编译时加入-g参数，如果没有-g，只能定位到func()函数。</p>
+<h2 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h2><ol>
+<li>为什么偏移是0x1000<br>猜测：操作系统对于内存最小的操作单位是页，一页在现在常用的操作系统的大小是4096字节。刚好是0x1000<br>   我们的代码比较简单，代码段的大小还超不过一页，所以偏移就是1页的大小0x1000</li>
+</ol>
+<ol>
+<li>如何通过0x869定位具体的位置<br>通过addr2line命令，可以直接查到。<br>我们也可以通过<code>objdump -d main</code><br>以下是部分输出：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">0000000000000859 &lt;_Z4funcv&gt;:</span><br><span class="line"> 859:	55                   	push   %rbp</span><br><span class="line"> 85a:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line"> 85d:	48 c7 45 f8 00 00 00 	movq   $0x0,-0x8(%rbp)</span><br><span class="line"> 864:	00</span><br><span class="line"> 865:	48 8b 45 f8          	mov    -0x8(%rbp),%rax</span><br><span class="line"> 869:	c7 00 01 00 00 00    	movl   $0x1,(%rax)</span><br><span class="line"> 86f:	90                   	nop</span><br><span class="line"> 870:	5d                   	pop    %rbp</span><br><span class="line"> 871:	c3                   	retq</span><br><span class="line"></span><br><span class="line">0000000000000872 &lt;main&gt;:</span><br><span class="line"> 872:	55                   	push   %rbp</span><br><span class="line"> 873:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line"> 876:	e8 de ff ff ff       	callq  859 &lt;_Z4funcv&gt;</span><br><span class="line"> 87b:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line"> 880:	5d                   	pop    %rbp</span><br><span class="line"> 881:	c3                   	retq</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>我们发现，刚好在0x869, movl操作，就是我们给nullptr指针写操作。同时函数是<code>_Z4funcv</code>, 转换过来就是func()<br>如果没有-g参数，我们就只能定位到这个func函数，还有对于函数入口的偏移。-g 会把行号信息加入进去</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">调试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/22/linux下使用dmesg调试程序崩溃/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-《程序员的自我修养》笔记与思考一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/05/《程序员的自我修养》笔记与思考一/">《程序员的自我修养》笔记与思考一</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/05/《程序员的自我修养》笔记与思考一/" class="archive-article-date">
+  	<time datetime="2019-06-05T12:23:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="fork-使用时复制-Copy-On-Write"><a href="#fork-使用时复制-Copy-On-Write" class="headerlink" title="fork 使用时复制(Copy On Write)"></a>fork 使用时复制(Copy On Write)</h4><p>使用fork出的进程，和原任务可以共享内存，只有当需要写入时，会copy一份单独使用。保证效率不会太差。</p>
+<h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><ol>
+<li>使用原子操作</li>
+</ol>
+<p>在不用的操作系统都提供了可以原子操作的方法，CPU也有相应的指令集进行支持。<br>延展:<br>在c++11标准中，可以使用std::atmoic来保证对对象操作的原子性</p>
+<ol>
+<li><p>使用锁，条件变量等等</p>
+</li>
+<li><p>编译优化和cpu动态调度</p>
+</li>
+</ol>
+<p>编译优化:<br>编译优化导致对象再寄存器中的值没有立即写回。导致数据出错。使用volatile关键字来阻止编译器进行优化。</p>
+<p>cpu动态调度:<br>即使编译出来的代码是按顺序的，cpu执行的顺序不一定会按顺序执行。</p>
+<p>思考:<br>作者在书中介绍，说加锁也不能避免线程安全。这点引起了我的疑惑。在平时PC的编程中，并不常用volatile这个关键字，一般加锁就可以保证。为此，查阅了一下相关资料。</p>
+<p>资料:<br><a href="https://stackoverflow.com/questions/17046558/how-does-a-mutex-ensure-a-variables-value-is-consistent-across-cores" target="_blank" rel="noopener">https://stackoverflow.com/questions/17046558/how-does-a-mutex-ensure-a-variables-value-is-consistent-across-cores</a></p>
+<blockquote>
+<p>The consistency across cores is ensured by memory barriers (which also prevents instructions reordering). When you use std::atomic, not only do you access the data atomically, but the compiler (and library) also insert the relevant memory barriers.</p>
+<p>Mutexes work the same way: the mutex implementations (eg. pthreads or WinAPI or what not) internally also insert memory barriers.</p>
+</blockquote>
+<p>这条回答说, 使用std::atmoic和std::mutex都会插入内存屏障, 而内存屏障会保证内核操作的一致性。不会存在乱序调用的情况。<br>也就是说，内存屏障是锁的一条实现原理。<br>后面的一条回答，也说到现在的大多数多核处理器(x86和x64), 是保证高速缓存一致的。</p>
+<p>那么这个效果，应该是和硬件cpu相关, 在我们平时使用的pc上只需要加锁就可以了。<br>但是如果是嵌入式设备，不一定支持相关的操作，可能就需要我们手动加入voltaile关键字了</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/05/《程序员的自我修养》笔记与思考一/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux简单驱动实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/17/linux简单驱动实现/">linux简单驱动实现</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/17/linux简单驱动实现/" class="archive-article-date">
+  	<time datetime="2019-04-17T02:44:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>研究如何编写一个linux的驱动。<br>驱动是和内核强挂钩的，所以我们需要先下载和目标机器上相同版本的linux内核源码</p>
+<p>通过命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure></p>
+<p>就可以查看到linux的内核版本</p>
+<p>1、下载内核源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget</span><br></pre></td></tr></table></figure></p>
+<p>未完待续。。。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">驱动</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/17/linux简单驱动实现/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-探测局域网内所有ip地址" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/28/探测局域网内所有ip地址/">探测局域网内所有ip地址</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/28/探测局域网内所有ip地址/" class="archive-article-date">
+  	<time datetime="2019-03-28T13:39:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我有一个设备，这个设备是支持adb的。每次运行会自动连接到一个wifi热点上面。<br>但是，不同热点dhcp分配的ip是不一样的。所以当我需要调试时，就必须要知道这个设备的ip地址。然后使用adb。</p>
+<p>所以我需要知道，如何去获取当期局域网内的所有IP地址。以此来判断设备可能是哪个IP</p>
+<p>在linux和mac上，有一个非常强大的工具，<code>nmap</code>。他可以进行端口和ip的扫描, 功能十分强大</p>
+<p>nmap的扫描方式有很多，不同的方式，功能和速度也不一样：</p>
+<ol>
+<li>使用主机是否存在的方式扫描。(是否可以ping通)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.1.0/24</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个方式是比较快的，但是如果ICMP被禁用了。是扫描不到对方主机的。比如一些开了防火墙的windows系统</p>
+<ol>
+<li>使用TCP的Syn进行扫描。通过Tcp握手的一次Syn来判断，不会完全建立连接。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS 192.168.1.0/24</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种方式速度也比较快，因为没有完全建立链接。并且可以扫描到屏蔽了ICMP的windows系统</p>
+<p>除了可以扫描局域网IP.还可以看某个IP的端口是否被监听。这样我们调试一些程序时，会更方便：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 7382 192.168.154.1</span><br></pre></td></tr></table></figure></p>
+<p>查看7382端口是否被监听，目前处于什么状态。</p>
+<p>PS：</p>
+<ol>
+<li>nmap在某些扫描方式下, 需要root权限。</li>
+<li>经过我wirshark抓包，发现一种扫描方式，会使用多种方法并行。比如我现在不管使用什么方法，开始都会用arp扫描。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小工具</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/28/探测局域网内所有ip地址/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-arp初探，以及arp、arping命令使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/05/arp初探，以及arp、arping命令使用/">arp初探，以及arp、arping命令使用</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/05/arp初探，以及arp、arping命令使用/" class="archive-article-date">
+  	<time datetime="2019-03-05T09:20:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="arp-协议简介"><a href="#arp-协议简介" class="headerlink" title="arp 协议简介"></a>arp 协议简介</h4><blockquote>
+<p>arp (Address Resolution Protocol) 地址解析协议, 是通过解析网路层地址来找寻数据链路层地址的一个在网络协议包中极其重要的网络传输协议。</p>
+</blockquote>
+<p>arp，可以通过ip地址，来获取对应IP的MAC地址.<br>不过arp也可以探测当前局域网是否有这个IP。</p>
+<h4 id="arp工具使用"><a href="#arp工具使用" class="headerlink" title="arp工具使用"></a>arp工具使用</h4><p>arp会发一个广播，说，谁拥有某个IP，谁有的话，告诉我一下。</p>
+<p>我们可以通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp -a</span><br></pre></td></tr></table></figure></p>
+<p>来查看当期arp的缓存表。但是，这个表并不是实时的。如果有一个设备拿到ip之后，并没有通信。在arp表中是找不到这个设备的。<br>并且，在执行这条指令时，本机也不会发起arp广播。只是查询本地的缓存。</p>
+<p>如果, 我想要发起arp广播，用什么方法呢。可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arping x.x.x.x</span><br></pre></td></tr></table></figure></p>
+<p>arping会发起arp广播，在局域网内查找是否有该ip。如果有，则会有返回。如果没有，就会timeout。</p>
+<h4 id="arping-和-ping-的区别"><a href="#arping-和-ping-的区别" class="headerlink" title="arping 和 ping 的区别"></a>arping 和 ping 的区别</h4><ol>
+<li>使用的协议不同, ping使用ICMP, arping使用arp</li>
+<li>有些windows配置会禁用ICMP，所以使用ping是没有办法检测设备存在的。</li>
+<li>如果本地的ip地址和你想检测远端的IP地址相同，ping会ping到自己。arping可以检测到远端是否有和你相同IP的设备。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">arp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/05/arp初探，以及arp、arping命令使用/">展开全文 >></a>
         </p>
       
 
@@ -209,6 +1084,10 @@
 
   
   
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
 
 
           </div>
@@ -218,7 +1097,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 dangjiahe
+    		&copy; 2020 dangjiahe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -299,6 +1178,94 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">镜像制作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gcc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">glibc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">nsis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">网络</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">arp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">调试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">macos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">tip</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">批处理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">驱动</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gdb</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">coredump</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">编译器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">cmake</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
