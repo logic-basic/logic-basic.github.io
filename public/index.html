@@ -146,6 +146,671 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-NSUserDefaults-文件储存位置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/23/NSUserDefaults-文件储存位置/">NSUserDefaults 文件储存位置</a>
+    </h1>
+  
+
+        
+        <a href="/2020/12/23/NSUserDefaults-文件储存位置/" class="archive-article-date">
+  	<time datetime="2020-12-23T07:18:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="NSUserDefaults"><a href="#NSUserDefaults" class="headerlink" title="NSUserDefaults"></a>NSUserDefaults</h2><p>NSUserDefaults 是app来存储一些用户配置项的。方便程序下次启动来读取</p>
+<p>NSUserDefaults 会在本地电脑生成一个plist文件, 该plist会以app的bundle id来命名</p>
+<h2 id="NSUserDefaults文件位置"><a href="#NSUserDefaults文件位置" class="headerlink" title="NSUserDefaults文件位置"></a>NSUserDefaults文件位置</h2><p>plist文件的位置在 <code>~/Library/Preferences</code></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macos</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/23/NSUserDefaults-文件储存位置/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-cmake-编译mac-Big-Sur-universal库" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/11/cmake-编译mac-Big-Sur-universal库/">cmake 编译mac Big Sur universal库</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/11/cmake-编译mac-Big-Sur-universal库/" class="archive-article-date">
+  	<time datetime="2020-11-11T11:56:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在11月11日, 苹果发布了新款Macbook 电脑，统一采用ARM架构的M1芯片。<br>具体的性能就不详细介绍了。最大的变化是从x86架构转移到了ARM架构。<br>那么之前的app和库，就不能完美的运行。</p>
+<h2 id="Universal-App"><a href="#Universal-App" class="headerlink" title="Universal App"></a>Universal App</h2><p>Universal App 是苹果推出的一个过渡方案，在使用xcode构建ap时，会自动编译两套二进制程序.<br>一套x86, 一套arm64。然后把两个程序打包在一起。这样无论在哪个架构的电脑上运行，都能顺利的运行程序.</p>
+<p>这一过程，是xcode自动执行的，但是同时也需要app所依赖所有的库也必须是 Universal版本.<br>如果库只有一个架构，那么在构建打包时，将会出错。</p>
+<p>Universal App构建，需要在xcode12.2之后的版本才被支持</p>
+<h2 id="使用命令行构建"><a href="#使用命令行构建" class="headerlink" title="使用命令行构建"></a>使用命令行构建</h2><p>如果构建app，xcode会很方便，但是构建库时，使用xcode就比较复杂了。<br>我们可以使用如下makefile直接编译目标的架构程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x86_app: main.c</span><br><span class="line">    $(CC) main.c -o x86_app -target x86_64-apple-macos10.12</span><br><span class="line">arm_app: main.c</span><br><span class="line">    $(CC) main.c -o arm_app -target arm64-apple-macos11</span><br><span class="line">universal_app: x86_app arm_app</span><br><span class="line">    lipo -create -output universal_app x86_app arm_app</span><br></pre></td></tr></table></figure>
+<p>这也是从官方说明中，摘抄出来的，网址如下：<br><a href="https://developer.apple.com/documentation/xcode/building_a_universal_macos_binary?language=objc" target="_blank" rel="noopener">https://developer.apple.com/documentation/xcode/building_a_universal_macos_binary?language=objc</a></p>
+<h2 id="使用cmake构建通用库"><a href="#使用cmake构建通用库" class="headerlink" title="使用cmake构建通用库"></a>使用cmake构建通用库</h2><p>使用裸命令来编译，非常复杂，需要使用lipo来进行合并。这对我们原有的库的编译方式影响很大。</p>
+<p>cmake提供了一个宏，可以用来同时编译两个架构的代码。</p>
+<p>这个宏就是CMAKE_OSX_ARCHITECTURES.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake .. &quot;-DCMAKE_OSX_ARCHITECTURES=arm64;x86_64&quot;</span><br></pre></td></tr></table></figure>
+<p>通过这个指令，cmake在编译的时候，会加入<code>-arch arm64 -arch x86_64</code>这个参数。<br>这样，就只需要一次编译，就可以编译出两个架构的通用库</p>
+<p>可以使用file命令来对二进制文件进行检查，通货版本输出如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">client: Mach-O universal binary with 2 architectures: [x86_64:Mach-O 64-bit executable x86_64] [arm64]</span><br><span class="line">client (for architecture x86_64):	Mach-O 64-bit executable x86_64</span><br><span class="line">client (for architecture arm64):	Mach-O 64-bit executable arm64</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，该方法对cmake版本和xcode版本都有要求：<br>cmake -  3.11版本以上<br>xcode -  12.2版本以上</p>
+<h2 id="xcode编译器版本切换"><a href="#xcode编译器版本切换" class="headerlink" title="xcode编译器版本切换"></a>xcode编译器版本切换</h2><p>一台mac电脑中，是可以同时存在不同xcode版本的，这样也是利于开发人员进行开发和调试</p>
+<p>比如clang编译器就可以通过 xcode-select来切换版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo xcode-select -s /Applications/Xcode.app/Contents/Developer</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">sudo xcode-select -s /Applications/Xcode-Beta.app/Contents/Developer</span><br></pre></td></tr></table></figure>
+<p>注意，如果两个xcode放在同一个文件夹，需要给他们分配不同的名称。<br>如果存在两个版本的xcode，需要先用xcode-select切换到12.2之后的版本，才可以用cmake来编译通用版本库</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macos</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">cmake</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/11/cmake-编译mac-Big-Sur-universal库/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ASCII注释-工具推荐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/10/ASCII注释-工具推荐/">ASCII注释 工具推荐</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/10/ASCII注释-工具推荐/" class="archive-article-date">
+  	<time datetime="2020-11-10T12:30:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家再一些开源代码中，可能见到过如下注释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">//  Suspended---&gt;Queued---&gt;Connecting----&gt;Transferring---&gt;Transferred</span><br><span class="line">//       |          ^         |                 |               |</span><br><span class="line">//       |          |         V                 V               | (complete)</span><br><span class="line">//       +----------|---------+-----------------+-----+         V</span><br><span class="line">//                  |         |                 |     |    Acknowledged</span><br><span class="line">//                  |         V                 V     |</span><br><span class="line">//                  |  Transient Error-------&gt;Error   |</span><br><span class="line">//                  |         |                 |     |(cancel)</span><br><span class="line">//                  |         +-------+---------+---&gt;-+</span><br><span class="line">//                  |                 V               |</span><br><span class="line">//                  |   (resume)      |               |</span><br><span class="line">//                  +------&lt;----------+               +----&gt;Cancelled</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//                  on-demand                on-demand</span><br><span class="line">//   +---------------------------&gt; kNew &lt;--------------+-------------+</span><br><span class="line">//   |                              |                  |             |</span><br><span class="line">//   |                              V                  |             |</span><br><span class="line">//   |   +--------------------&gt; kChecking -&lt;-------+---|---&lt;-----+   |</span><br><span class="line">//   |   |                          |              |   |         |   |</span><br><span class="line">//   |   |            error         V       no     |   |         |   |</span><br><span class="line">//  kNoUpdate &lt;---------------- [update?] -&gt;---- kUpToDate     kUpdated</span><br><span class="line">//     ^                            |                              ^</span><br><span class="line">//     |                        yes |                              |</span><br><span class="line">//     |        diff=false          V                              |</span><br><span class="line">//     |          +-----------&gt; kCanUpdate                         |</span><br><span class="line">//     |          |                 |                              |</span><br><span class="line">//     |          |                 V              no              |</span><br><span class="line">//     |          |        [differential update?]-&gt;----+           |</span><br><span class="line">//     |          |                 |                  |           |</span><br><span class="line">//     |          |             yes |                  |           |</span><br><span class="line">//     |          |   error         V                  |           |</span><br><span class="line">//     |          +---------&lt;- kDownloadingDiff        |           |</span><br><span class="line">//     |          |                 |                  |           |</span><br><span class="line">//     |          |                 |                  |           |</span><br><span class="line">//     |          |   error         V                  |           |</span><br><span class="line">//     |          +---------&lt;- kUpdatingDiff -&gt;--------|-----------+ success</span><br><span class="line">//     |                                               |           |</span><br><span class="line">//     |              error                            V           |</span><br><span class="line">//     +----------------------------------------- kDownloading     |</span><br><span class="line">//     |                                               |           |</span><br><span class="line">//     |              error                            V           |</span><br><span class="line">//     +------------------------------------------ kUpdating -&gt;----+ success</span><br></pre></td></tr></table></figure>
+<p>以及</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+------+     +---------+                   +-----------+     +---------+</span><br><span class="line">| Bonn | --&gt; | Koblenz | ----------------&gt; | Frankfurt | --&gt; | Dresden |</span><br><span class="line">+------+     +---------+                   +-----------+     +---------+</span><br><span class="line">               |                             ^</span><br><span class="line">               |                             |</span><br><span class="line">               |                             |</span><br><span class="line">               |             +-------+       |</span><br><span class="line">               +-----------&gt; | Trier | ------+</span><br><span class="line">                             +-------+</span><br></pre></td></tr></table></figure>
+<p>这种注释，肯定不是一个字符一个字符敲出来的，可以有工具，来进行生成。</p>
+<p>推荐一个工具网站：<a href="http://asciiflow.com/" target="_blank" rel="noopener">http://asciiflow.com/</a><br>在这个网站上，就可以使用ascii字符来进行作图。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小工具</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/10/ASCII注释-工具推荐/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-shell非阻塞读写管道-及shell多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/07/shell非阻塞读写管道-及shell多线程/">shell非阻塞读写管道,及shell多线程</a>
+    </h1>
+  
+
+        
+        <a href="/2020/11/07/shell非阻塞读写管道-及shell多线程/" class="archive-article-date">
+  	<time datetime="2020-11-07T02:51:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本操作，shell中创建管道"><a href="#基本操作，shell中创建管道" class="headerlink" title="基本操作，shell中创建管道"></a>基本操作，shell中创建管道</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfifo /tmp/fifo</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mknod /tmp/fifo p</span><br></pre></td></tr></table></figure>
+<p>这样，我们就在tmp目录下，创建了一个名为fifo的管道</p>
+<h2 id="阻塞读-写管道"><a href="#阻塞读-写管道" class="headerlink" title="阻塞读, 写管道"></a>阻塞读, 写管道</h2><p>通过echo和cat，就可以方便的读写管道的内容，但是通过cat和echo读写管道时，是阻塞的。<br>也就是，cat读,如果当前管道无数据，就会一直卡主，直到有数据出来。<br>echo写，如何没有其他程序读数据，也会一直卡在，直到有人读数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 123 &gt; /tmp/fifo</span><br><span class="line">cat /tmp/fifo</span><br></pre></td></tr></table></figure>
+<p>操作如上，这样的话，操作流程会很不方便, 大部分情况下，我们并不希望同步进行。<br>所以我们可以用非阻塞的方法来读写</p>
+<h2 id="非阻塞写管道"><a href="#非阻塞写管道" class="headerlink" title="非阻塞写管道"></a>非阻塞写管道</h2><p>为了实现非阻塞操作，我们需要用到重定向</p>
+<p>利用重定向‘&gt;&amp;’可以为一个FD赋值，使其指向一个非null的文件，其实就是打开一个FD</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">6&gt;&amp;1</span><br><span class="line"># 可以理解为将FD6指针指向FD1指针指向的文件</span><br><span class="line"># 这样，FD6和FD1就同时指向同一个文件</span><br></pre></td></tr></table></figure>
+<p>一个重定向只在当前命令中有效。通过exec可以使IO重定向在当前shell中长期有效：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 打开FD6</span><br><span class="line">exec 6&gt;&amp;1</span><br><span class="line"># 关闭FD6</span><br><span class="line">exec 6&gt;&amp;-</span><br></pre></td></tr></table></figure>
+<p>我们可以创建一个描述符来关联管道<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec 6&lt;&gt;/tmp/fifo</span><br></pre></td></tr></table></figure></p>
+<p>这样就创建了一个文件描述符6，和/tmp/fifo进行了绑定<br>操作6，就相当于操作/tmp/fifo，并且具有一个新特性，写入不阻塞<br>可以如下操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 123 &gt;&amp;6</span><br></pre></td></tr></table></figure>
+<h2 id="shell实现多线程-多进程"><a href="#shell实现多线程-多进程" class="headerlink" title="shell实现多线程(多进程)"></a>shell实现多线程(多进程)</h2><p>在shell下，我们可以使用 &amp; 符号, 来把程序放到后台去运行。<br>但是在执行较多任务时，控制不了同时运行的个数。只要放入后台，便不厚受到操控</p>
+<p>我们可以使用fifo读阻塞，重定向后写不阻塞的特性，来实现后台数目可控</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">tmp_fifofile=&quot;/tmp/$$.fifo&quot;</span><br><span class="line">mkfifo $tmp_fifofile   # 新建一个FIFO类型的文件</span><br><span class="line">exec 6&lt;&gt;$tmp_fifofile  # 将FD6指向FIFO类型</span><br><span class="line">rm $tmp_fifofile  #删也可以，</span><br><span class="line"></span><br><span class="line">thread_num=5  # 定义最大线程数</span><br><span class="line">job_num=100   # 任务总数</span><br><span class="line"></span><br><span class="line">#根据线程总数量设置令牌个数</span><br><span class="line">#事实上就是在fd6中放置了$thread_num个回车符</span><br><span class="line">for ((i=0;i&lt;$&#123;thread_num&#125;;i++));do</span><br><span class="line">    echo</span><br><span class="line">done &gt;&amp;6</span><br><span class="line"></span><br><span class="line">for ((i=0;i&lt;$&#123;job_num&#125;;i++));</span><br><span class="line">do</span><br><span class="line">    # 一个read -u6命令执行一次，就从FD6中减去一个回车符，然后向下执行</span><br><span class="line">    # 当FD6中没有回车符时，就停止，从而实现线程数量控制</span><br><span class="line">    read -u6</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;great&quot; # 可以用实际命令代替</span><br><span class="line">        echo &gt;&amp;6 # 当进程结束以后，再向FD6中加上一个回车符，即补上了read -u6减去的那个</span><br><span class="line">    &#125; &amp;</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">wait # 等待所有线程结束</span><br><span class="line"></span><br><span class="line">stop_time=`date +%s` # 定义脚本运行的结束时间</span><br><span class="line">echo &quot;TIME:`expr $stop_time - $start_time`&quot; # 输出脚本运行时间</span><br><span class="line"></span><br><span class="line">exec 6&gt;&amp;- # 关闭FD6</span><br><span class="line">echo &quot;over&quot; # 表示脚本运行结束</span><br></pre></td></tr></table></figure>
+<p>我们设定了5条线程，100个任务。<br>1、我们向fifo非阻塞写入5个换行字符。代表5个空闲线程<br>2、通过for循环使用read来阻塞读取。前5循环会把字符读完，如果下一次读取，没有任务执行完，read将阻塞<br>3、当前面的任务执行完毕后，会再非阻塞的向fifo写入字符。代表有空闲。read读取到将继续执行</p>
+<p>最终保证同时只有5个任务并行。完成100个任务。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">shell</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/11/07/shell非阻塞读写管道-及shell多线程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-macos-app进行公证" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/09/macos-app进行公证/">macos app进行公证</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/09/macos-app进行公证/" class="archive-article-date">
+  	<time datetime="2020-09-09T11:08:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>自从macos的系统升级到10.14之后，mac开始对系统上的应用程序进行了大规模的限制。</p>
+<ul>
+<li>应用必须拥有正规签名，才可以进行运行。</li>
+<li>应用如果不进行公证，那么在第一次打开的时候，则会提示不信任的开发者。不能直接打开。需要在设置里点击仍然打开字样。</li>
+</ul>
+<p>这样的话，会对用户的使用，造成很大的不便。</p>
+<h2 id="如何公证"><a href="#如何公证" class="headerlink" title="如何公证"></a>如何公证</h2><h3 id="使用Xcode"><a href="#使用Xcode" class="headerlink" title="使用Xcode"></a>使用Xcode</h3><p>在工具栏选择archives, 弹出窗口后，选择自己要公证的程序。<br>选择distribute app, 然后进行公证。</p>
+<p>但是使用xcode来公证，需要使用xcode编译才可以，Qt的程序就不能使用这种方法</p>
+<h3 id="使用命令进行公证"><a href="#使用命令进行公证" class="headerlink" title="使用命令进行公证"></a>使用命令进行公证</h3><p>这里我们主要介绍这种方法</p>
+<h4 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h4><p>公证的命令是altool，需要xcrun altool来运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun altool --notarize-app --file **.zip  -u &quot;appid&quot; -p &quot;passwd&quot; --primary-bundle-id &quot;bundle-id&quot;</span><br></pre></td></tr></table></figure>
+<p>参数中，–file指定需要公证的app，需要先用zip进行打包，上传的时候，不支持直接指定app文件<br>-u 是指定apple id， -p 是指定密码  –primary-bundle-id 是指定app的 bundle id</p>
+<p>zip 需要把app进行打包，可以用如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ditto -c -k --keepParent *.app *.zip</span><br></pre></td></tr></table></figure>
+<p>如果不想使用明文密码。可以先把密码保持到mac本地的钥匙串中，然后使用 -p “@keychain:AC_PASSWORD” 来进行<br>其中，AC_PASSWORD为iterm name。<br>添加密码进钥匙串，可以使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">security add-generic-password -a &quot;AC_USERNAME&quot; -w &quot;AC_PASSWORD&quot; -s &quot;ITEM_NAME&quot;</span><br></pre></td></tr></table></figure>
+<p>其中，AC_USERNAME是用户名，对应altool的-u参数，AC_PASSWORD是真正的密码，ITEM_NAME是名称，填在altool的keychain:后面</p>
+<p>添加成功后如图：</p>
+<p><img src="https://demo-1252736716.cos.ap-shanghai.myqcloud.com/macos%E8%AE%A4%E8%AF%811.png" alt></p>
+<p>成功话，会显示如下信息：</p>
+<p>No errors uploading ‘**.zip’.<br>RequestUUID = 64d2e096-ae50-4fea-97a0-4fe4c1c5fb85</p>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><p>上传应用后，需要等一段时间，来等待苹果来认证。不会超过一个小时，大概率在5分钟内完成。</p>
+<p>在这期间，可以使用如下命令来查询状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun altool --notarization-info UUID -u &quot;***&quot; -p &quot;@keychain:AT_PASSWD&quot;</span><br></pre></td></tr></table></figure>
+<p>UUID是上传之后，返回的UUID，同时再附上用户密码即可。</p>
+<p>正在处理中，返回如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">No errors getting notarization info.</span><br><span class="line"> </span><br><span class="line">       Date: 2020-08-04 08:50:45 +0000</span><br><span class="line">RequestUUID: 6c1e724f-491a-4273-b066-55c1b42c8e79</span><br><span class="line">     Status: in progress</span><br></pre></td></tr></table></figure>
+<p>如果失败，返回如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">No errors getting notarization info.</span><br><span class="line"> </span><br><span class="line">Date: 2020-08-04 08:50:45 +0000</span><br><span class="line">Hash: a2c83b32c1214cc07558c32c71efdbf09bb19191e33c59fb65d7d74b7123104d</span><br><span class="line">LogFileURL: https://osxapps-ssl.itunes.apple.com/itunes-assets/Enigma114/v4/b0/02/0a/b0020ada-f552-fadb-52bc-cea612a5a43e/developer_log.json?accessKey=1596725559_4297314406524191325_8NZckopz%2BOMwbzl%2BzTJubTgcQREE05cRlEU9iSG33MjRJHpebCD36Ve53DMtftKnJ70kDznYhES%2Bcek%2B5Fm07GsYDGbDowAYhHJL8Iez1I7q6kYOfGvIFPXJDdiZX923C4csk33brcaOD8kep8QtmXAsLl44xNeEODSc32r3qzo%3D</span><br><span class="line">RequestUUID: 6c1e724f-491a-4273-b066-55c1b42c8e79</span><br><span class="line">Status: invalid</span><br><span class="line">Status Code: 2</span><br><span class="line">Status Message: Package Invalid</span><br></pre></td></tr></table></figure>
+<p>可以通过LogFileURL的链接，来查看具体失败内容。</p>
+<p>成功的话，会返回如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">No errors getting notarization info.</span><br><span class="line"> </span><br><span class="line">Date: 2020-08-04 08:58:36 +0000</span><br><span class="line">Hash: c3306b0409ca39b8b882a41789282270850a09f0f6442c73703596c47309e16b</span><br><span class="line">LogFileURL: https://osxapps-ssl.itunes.apple.com/itunes-assets/Enigma114/v4/cc/df/3d/ccdf3d51-62c1-e5bd-25d6-2b03e34011d4/developer_log.json?accessKey=1596726032_3967876306215616611_GdX8pAnRtS7nHuM1g%2BbAKGp9SZ2StHfo7ALENG0dIm06WbJ01QLv20INy%2Fvs55v48bxRIy6h3d4nP0feDlVMGhb08D0r57qI7cmoFb55TQ%2B7lKuCOcIFqy18iv2Okn22pxaim2zhBAosAbf4xVYWe127mi7aahrrrZqHHcdRzNk%3D</span><br><span class="line">RequestUUID: 06a30247-1490-459d-a9fd-1f42918a78f8</span><br><span class="line">Status: success</span><br><span class="line">Status Code: 0</span><br><span class="line">Status Message: Package Approved</span><br></pre></td></tr></table></figure>
+<p>无论是否成功还是失败，apple都会发送一封邮件来告知你结果。</p>
+<h4 id="查看app是否被公证"><a href="#查看app是否被公证" class="headerlink" title="查看app是否被公证"></a>查看app是否被公证</h4><p>成功之后，需要稍等一段时间，公证会自动生效</p>
+<p>可以通过<code>spctl -a -v  **.app</code>  来查询状态</p>
+<p>如果出现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">**.app: accepted</span><br><span class="line">source=Developer ID</span><br></pre></td></tr></table></figure>
+<p>说明还未公证成功，如果出现如下则证明公证成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">**.app: accepted</span><br><span class="line">source=Notarized Developer ID</span><br></pre></td></tr></table></figure>
+<p>官方文档参考地址：</p>
+<p><a href="https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087720" target="_blank" rel="noopener">https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow#3087720</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">macos</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/09/macos-app进行公证/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-c-获取本地日期并格式化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/29/c-获取本地日期并格式化/">c++获取本地日期并格式化</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/29/c-获取本地日期并格式化/" class="archive-article-date">
+  	<time datetime="2020-08-29T02:43:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一些小方法的使用，做此记录</p>
+<p>需要包含<code>#include &lt;ctime&gt;</code></p>
+<h4 id="获取当前的日期"><a href="#获取当前的日期" class="headerlink" title="获取当前的日期"></a>获取当前的日期</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">struct tm* stime = localtime(&amp;t);</span><br></pre></td></tr></table></figure>
+<h4 id="对tm进行格式化，变为字符串"><a href="#对tm进行格式化，变为字符串" class="headerlink" title="对tm进行格式化，变为字符串"></a>对tm进行格式化，变为字符串</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char tmp[16] = &#123;0&#125;;</span><br><span class="line">strftime(tmp, sizeof(tmp), &quot;%Y%m%d&quot;, stime);</span><br></pre></td></tr></table></figure>
+<p>%Y%m%d表示年月日,例如 20200825</p>
+<table>
+<thead>
+<tr>
+<th>说明符</th>
+<th>替换为</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%a</td>
+<td>缩写的星期几名称</td>
+<td>Sun</td>
+</tr>
+<tr>
+<td>%A</td>
+<td>完整的星期几名称</td>
+<td>Sunday</td>
+</tr>
+<tr>
+<td>%b</td>
+<td>缩写的月份名称</td>
+<td>Mar</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>完整的月份名称</td>
+<td>March</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>日期和时间表示法    Sun Aug 19 02:56:02</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>一月中的第几天（01-31）</td>
+<td>19</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>24 小时格式的小时（00-23）</td>
+<td>14</td>
+</tr>
+<tr>
+<td>%I</td>
+<td>12 小时格式的小时（01-12）</td>
+<td>05</td>
+</tr>
+<tr>
+<td>%j</td>
+<td>一年中的第几天（001-366）</td>
+<td>231</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>十进制数表示的月份（01-12）</td>
+<td>08</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>分（00-59）</td>
+<td>55</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>AM 或 PM 名称</td>
+<td>PM</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>秒（00-61）</td>
+<td>02</td>
+</tr>
+<tr>
+<td>%U</td>
+<td>一年中的第几周，以第一个星期日作为第一周的第一天（00-53）</td>
+<td>33</td>
+</tr>
+<tr>
+<td>%w</td>
+<td>十进制数表示的星期几，星期日表示为 0（0-6）</td>
+<td>4</td>
+</tr>
+<tr>
+<td>%W</td>
+<td>一年中的第几周，以第一个星期一作为第一周的第一天（00-53）</td>
+<td>34</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>日期表示法    08/19</td>
+<td>/12</td>
+</tr>
+<tr>
+<td>%X</td>
+<td>时间表示法    02:50</td>
+<td>:06</td>
+</tr>
+<tr>
+<td>%y</td>
+<td>年份，最后两个数字（00-99）</td>
+<td>01</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>年份</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>%Z</td>
+<td>时区的名称或缩写</td>
+<td>CDT</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>一个 % 符号</td>
+<td>%</td>
+</tr>
+</tbody>
+</table>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">tip</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/29/c-获取本地日期并格式化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-macos程序-最小化弹出和进行一次置顶操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -248,30 +913,16 @@
       
         <p>嵌入式程序奔溃，一般不好定位。不能直接gdb调试。用dmesg结合addr2line呢，有时候根据地址也查不到具体的位置，因为可能最后在so中崩溃。</p>
 <p>为此，如果空间够大，可以开启coredump来生成coredump文件。然后使用gdb来进行调试</p>
-<ol>
-<li>首先开启生成coredump</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;/mnt/sdcard/core-%p-%e.$(date &quot;+%Y%m%d_%H%M%S&quot;)&quot; &gt; /proc/sys/kernel/core_pattern</span><br><span class="line">ulimit -c unlimited</span><br></pre></td></tr></table></figure>
+<h5 id="开启生成coredump"><a href="#开启生成coredump" class="headerlink" title="开启生成coredump"></a>开启生成coredump</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;/mnt/sdcard/core-%p-%e.$(date &quot;+%Y%m%d_%H%M%S&quot;)&quot; &gt; /proc/sys/kernel/core_pattern</span><br><span class="line">ulimit -c unlimited</span><br></pre></td></tr></table></figure>
 <p>这样，程序崩溃后,coredump就会生成在生成在/mnt/sdcard目录,如果要放在其他目录,改前面的目录即可</p>
-<ol>
-<li>复现问题，程序奔溃，生成coredump</li>
-</ol>
-<ol>
-<li>使用gdb + coredump文件的方式运行gdb</li>
-</ol>
+<h5 id="复现问题"><a href="#复现问题" class="headerlink" title="复现问题"></a>复现问题</h5><p>程序奔溃，生成coredump</p>
+<h5 id="运行gdb"><a href="#运行gdb" class="headerlink" title="运行gdb"></a>运行gdb</h5><p>使用gdb + coredump文件的方式运行gdb</p>
 <p>这个gdb，必须是交叉编译器附带的gdb，否则可能不识别coredump文件</p>
-<ol>
-<li><p>刚加载coredump文件, 还缺少很多so文件，比如libc.so, libc++so等等, 缺少这些so，我们的堆栈信息是显示不了的。</p>
-</li>
-<li><p>使用<code>info sharedlibrary</code> 来查看缺少哪些库</p>
-</li>
-<li><p>使用<code>set solib-search-path</code> 来添加so的路径</p>
-</li>
-</ol>
+<h5 id="查看缺少的动态库"><a href="#查看缺少的动态库" class="headerlink" title="查看缺少的动态库"></a>查看缺少的动态库</h5><p>刚加载coredump文件, 还缺少很多so文件，比如libc.so, libc++so等等, 缺少这些so，我们的堆栈信息是显示不了的。</p>
+<p>使用<code>info sharedlibrary</code> 来查看缺少哪些库</p>
+<h5 id="添加缺少的动态库"><a href="#添加缺少的动态库" class="headerlink" title="添加缺少的动态库"></a>添加缺少的动态库</h5><p>使用<code>set solib-search-path</code> 来添加so的路径</p>
 <p>这个路径一般在交叉编译器相关目录，如果有多个目录，则使用;来分隔</p>
-<ol>
-<li>添加完目录之后，既可使用bt来查看崩溃时的堆栈</li>
-</ol>
+<p>添加完目录之后，既可使用bt来查看崩溃时的堆栈</p>
 
       
 
@@ -520,572 +1171,9 @@
 
 
   
-    <article id="post-使用gdb调试android程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/26/使用gdb调试android程序/">使用gdb调试android程序</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/26/使用gdb调试android程序/" class="archive-article-date">
-  	<time datetime="2019-06-26T02:02:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前有一个jni接口调用java方法，在android程序中出现可卡死的问题。<br>因为接口调用比较频繁，没法通过log来排查问题。这个问题又需要很长时间来复现，所以必须通过现场调试才行。</p>
-<h2 id="gdbserver"><a href="#gdbserver" class="headerlink" title="gdbserver"></a>gdbserver</h2><p>gdbserver 可以attach一个进程。同时可以监听在某一个端口来等待gdb的连接</p>
-<p>在android里面，如果是64位程序，则需要使用gdbserver64</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdbserver64 0.0.0.0:9999 --attach 10952</span><br></pre></td></tr></table></figure>
-<p>如上，就是监听在9999端口，attach 进程号为10952的进程</p>
-<h2 id="gdb调试"><a href="#gdb调试" class="headerlink" title="gdb调试"></a>gdb调试</h2><p>gdbserver监听之后，就可以使用gdb来调试了</p>
-<ol>
-<li><p><code>gdb</code></p>
-</li>
-<li><p><code>target remote 10.10.10.50:9999</code> 端口前面是android程序所在的ip</p>
-</li>
-</ol>
-<p>之后，gdb会加载so等信息</p>
-<ol>
-<li>加载完之后，使用<code>continue</code> 即可继续让程序运行</li>
-</ol>
-<h2 id="保存所有堆栈信息"><a href="#保存所有堆栈信息" class="headerlink" title="保存所有堆栈信息"></a>保存所有堆栈信息</h2><p>想保存堆栈信息时，可以按下ctrl+c . 就可以中断程序运行。</p>
-<p>设置log文件：<br><code>(gdb) set logging file /tmp/log.txt</code></p>
-<p>开始采集log<br><code>(gdb) set logging on</code></p>
-<p>输出所有的线程堆栈<br><code>(gdb) thread apply all bt</code></p>
-<p>关闭log采集<br><code>(gdb) set logging on</code></p>
-<p>之后，退出gdb就可以看到log了</p>
-<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>在gdb加载完进程时，可能会出现:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thread 1 &quot;eenshare.server&quot; received signal SIG33, Real-time event 33.</span><br></pre></td></tr></table></figure>
-<p>线程会收到33的信号，这个我们可以暂时忽略。直接再按c。继续。直到程序继续运行。不会影响程序运行结果<br>具体为什么会收到33, 这个可能还需要再继续研究.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">调试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">gdb</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/26/使用gdb调试android程序/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux下使用dmesg调试程序崩溃" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/22/linux下使用dmesg调试程序崩溃/">linux下使用dmesg调试程序崩溃</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/22/linux下使用dmesg调试程序崩溃/" class="archive-article-date">
-  	<time datetime="2019-06-22T02:46:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="dmesg输出"><a href="#dmesg输出" class="headerlink" title="dmesg输出"></a>dmesg输出</h2><p>dmesg是linux系统中，内核打印输出.<br>我们在内核中使用printk. 或者我们在用户空间写/dev/kmsg，也可以输出到dmesg</p>
-<h2 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h2><p>我们编写一个简单的程序main.cpp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 1</span><br><span class="line"> 2 #include &lt;iostream&gt;</span><br><span class="line"> 3</span><br><span class="line"> 4 void func() &#123;</span><br><span class="line"> 5     int *p = nullptr;</span><br><span class="line"> 6     *p = 1;</span><br><span class="line"> 7 &#125;</span><br><span class="line"> 8</span><br><span class="line"> 9 int main() &#123;</span><br><span class="line">10     func();</span><br><span class="line">11</span><br><span class="line">12     return 0;</span><br><span class="line">13 &#125;</span><br></pre></td></tr></table></figure></p>
-<p>编译之后运行</p>
-<p>当我们用户的程序崩溃时，操作系统会在dmesg打印一条信息。比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[  194.230017] main[727]: segfault at 0 ip 0000001de200e869 sp 00007ffeb667cb20 error 6 in main[1de200e000+1000]</span><br></pre></td></tr></table></figure>
-<p>其中,<br>ip为 指令寄存器<br>sp为 栈顶的偏移地址</p>
-<p>我们主要通过ip来判断位置，但是，如果我们运行多次，就会发现，ip的值，每次都不一样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[  840.467566] main[752]: segfault at 0 ip 0000009e40290869 sp 00007ffc615c5720 error 6 in main[9e40290000+1000]</span><br><span class="line">[  841.546995] main[765]: segfault at 0 ip 000000430da30869 sp 00007ffc6fb54990 error 6 in main[430da30000+1000]</span><br><span class="line">[  842.570851] main[777]: segfault at 0 ip 000000fc2df61869 sp 00007fff3d5eee50 error 6 in main[fc2df61000+1000]</span><br></pre></td></tr></table></figure></p>
-<p>经过观察，可以发现，每次ip的最后三位都是一样的。同时，我们发现main的后面有一个+1000。<br>我们通过计算可以发现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0x0000009e40290869 % 0x1000 = 0x869</span><br><span class="line">0x000000430da30869 % 0x1000 = 0x869</span><br><span class="line">0x000000fc2df61869 % 0x1000 = 0x869</span><br></pre></td></tr></table></figure></p>
-<p>这个0x869应该就是我们的代码段地址</p>
-<p>使用<code>addr2line -Cfe main 869</code><br>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">func()</span><br><span class="line">/home/dangjiahe/main.cpp:6</span><br></pre></td></tr></table></figure></p>
-<p>至此，我们可以定位到程序具体的崩溃位置，第二行，需要编译时加入-g参数，如果没有-g，只能定位到func()函数。</p>
-<h2 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h2><ol>
-<li>为什么偏移是0x1000<br>猜测：操作系统对于内存最小的操作单位是页，一页在现在常用的操作系统的大小是4096字节。刚好是0x1000<br>   我们的代码比较简单，代码段的大小还超不过一页，所以偏移就是1页的大小0x1000</li>
-</ol>
-<ol>
-<li>如何通过0x869定位具体的位置<br>通过addr2line命令，可以直接查到。<br>我们也可以通过<code>objdump -d main</code><br>以下是部分输出：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">0000000000000859 &lt;_Z4funcv&gt;:</span><br><span class="line"> 859:	55                   	push   %rbp</span><br><span class="line"> 85a:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line"> 85d:	48 c7 45 f8 00 00 00 	movq   $0x0,-0x8(%rbp)</span><br><span class="line"> 864:	00</span><br><span class="line"> 865:	48 8b 45 f8          	mov    -0x8(%rbp),%rax</span><br><span class="line"> 869:	c7 00 01 00 00 00    	movl   $0x1,(%rax)</span><br><span class="line"> 86f:	90                   	nop</span><br><span class="line"> 870:	5d                   	pop    %rbp</span><br><span class="line"> 871:	c3                   	retq</span><br><span class="line"></span><br><span class="line">0000000000000872 &lt;main&gt;:</span><br><span class="line"> 872:	55                   	push   %rbp</span><br><span class="line"> 873:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line"> 876:	e8 de ff ff ff       	callq  859 &lt;_Z4funcv&gt;</span><br><span class="line"> 87b:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line"> 880:	5d                   	pop    %rbp</span><br><span class="line"> 881:	c3                   	retq</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>我们发现，刚好在0x869, movl操作，就是我们给nullptr指针写操作。同时函数是<code>_Z4funcv</code>, 转换过来就是func()<br>如果没有-g参数，我们就只能定位到这个func函数，还有对于函数入口的偏移。-g 会把行号信息加入进去</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">调试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/22/linux下使用dmesg调试程序崩溃/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-《程序员的自我修养》笔记与思考一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/05/《程序员的自我修养》笔记与思考一/">《程序员的自我修养》笔记与思考一</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/05/《程序员的自我修养》笔记与思考一/" class="archive-article-date">
-  	<time datetime="2019-06-05T12:23:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="fork-使用时复制-Copy-On-Write"><a href="#fork-使用时复制-Copy-On-Write" class="headerlink" title="fork 使用时复制(Copy On Write)"></a>fork 使用时复制(Copy On Write)</h4><p>使用fork出的进程，和原任务可以共享内存，只有当需要写入时，会copy一份单独使用。保证效率不会太差。</p>
-<h4 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h4><ol>
-<li>使用原子操作</li>
-</ol>
-<p>在不用的操作系统都提供了可以原子操作的方法，CPU也有相应的指令集进行支持。<br>延展:<br>在c++11标准中，可以使用std::atmoic来保证对对象操作的原子性</p>
-<ol>
-<li><p>使用锁，条件变量等等</p>
-</li>
-<li><p>编译优化和cpu动态调度</p>
-</li>
-</ol>
-<p>编译优化:<br>编译优化导致对象再寄存器中的值没有立即写回。导致数据出错。使用volatile关键字来阻止编译器进行优化。</p>
-<p>cpu动态调度:<br>即使编译出来的代码是按顺序的，cpu执行的顺序不一定会按顺序执行。</p>
-<p>思考:<br>作者在书中介绍，说加锁也不能避免线程安全。这点引起了我的疑惑。在平时PC的编程中，并不常用volatile这个关键字，一般加锁就可以保证。为此，查阅了一下相关资料。</p>
-<p>资料:<br><a href="https://stackoverflow.com/questions/17046558/how-does-a-mutex-ensure-a-variables-value-is-consistent-across-cores" target="_blank" rel="noopener">https://stackoverflow.com/questions/17046558/how-does-a-mutex-ensure-a-variables-value-is-consistent-across-cores</a></p>
-<blockquote>
-<p>The consistency across cores is ensured by memory barriers (which also prevents instructions reordering). When you use std::atomic, not only do you access the data atomically, but the compiler (and library) also insert the relevant memory barriers.</p>
-<p>Mutexes work the same way: the mutex implementations (eg. pthreads or WinAPI or what not) internally also insert memory barriers.</p>
-</blockquote>
-<p>这条回答说, 使用std::atmoic和std::mutex都会插入内存屏障, 而内存屏障会保证内核操作的一致性。不会存在乱序调用的情况。<br>也就是说，内存屏障是锁的一条实现原理。<br>后面的一条回答，也说到现在的大多数多核处理器(x86和x64), 是保证高速缓存一致的。</p>
-<p>那么这个效果，应该是和硬件cpu相关, 在我们平时使用的pc上只需要加锁就可以了。<br>但是如果是嵌入式设备，不一定支持相关的操作，可能就需要我们手动加入voltaile关键字了</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/05/《程序员的自我修养》笔记与思考一/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux简单驱动实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/17/linux简单驱动实现/">linux简单驱动实现</a>
-    </h1>
-  
-
-        
-        <a href="/2019/04/17/linux简单驱动实现/" class="archive-article-date">
-  	<time datetime="2019-04-17T02:44:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>研究如何编写一个linux的驱动。<br>驱动是和内核强挂钩的，所以我们需要先下载和目标机器上相同版本的linux内核源码</p>
-<p>通过命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure></p>
-<p>就可以查看到linux的内核版本</p>
-<p>1、下载内核源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget</span><br></pre></td></tr></table></figure></p>
-<p>未完待续。。。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">驱动</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/04/17/linux简单驱动实现/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-探测局域网内所有ip地址" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/28/探测局域网内所有ip地址/">探测局域网内所有ip地址</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/28/探测局域网内所有ip地址/" class="archive-article-date">
-  	<time datetime="2019-03-28T13:39:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我有一个设备，这个设备是支持adb的。每次运行会自动连接到一个wifi热点上面。<br>但是，不同热点dhcp分配的ip是不一样的。所以当我需要调试时，就必须要知道这个设备的ip地址。然后使用adb。</p>
-<p>所以我需要知道，如何去获取当期局域网内的所有IP地址。以此来判断设备可能是哪个IP</p>
-<p>在linux和mac上，有一个非常强大的工具，<code>nmap</code>。他可以进行端口和ip的扫描, 功能十分强大</p>
-<p>nmap的扫描方式有很多，不同的方式，功能和速度也不一样：</p>
-<ol>
-<li>使用主机是否存在的方式扫描。(是否可以ping通)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.1.0/24</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这个方式是比较快的，但是如果ICMP被禁用了。是扫描不到对方主机的。比如一些开了防火墙的windows系统</p>
-<ol>
-<li>使用TCP的Syn进行扫描。通过Tcp握手的一次Syn来判断，不会完全建立连接。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS 192.168.1.0/24</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这种方式速度也比较快，因为没有完全建立链接。并且可以扫描到屏蔽了ICMP的windows系统</p>
-<p>除了可以扫描局域网IP.还可以看某个IP的端口是否被监听。这样我们调试一些程序时，会更方便：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 7382 192.168.154.1</span><br></pre></td></tr></table></figure></p>
-<p>查看7382端口是否被监听，目前处于什么状态。</p>
-<p>PS：</p>
-<ol>
-<li>nmap在某些扫描方式下, 需要root权限。</li>
-<li>经过我wirshark抓包，发现一种扫描方式，会使用多种方法并行。比如我现在不管使用什么方法，开始都会用arp扫描。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小工具</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/28/探测局域网内所有ip地址/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-arp初探，以及arp、arping命令使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/05/arp初探，以及arp、arping命令使用/">arp初探，以及arp、arping命令使用</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/05/arp初探，以及arp、arping命令使用/" class="archive-article-date">
-  	<time datetime="2019-03-05T09:20:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="arp-协议简介"><a href="#arp-协议简介" class="headerlink" title="arp 协议简介"></a>arp 协议简介</h4><blockquote>
-<p>arp (Address Resolution Protocol) 地址解析协议, 是通过解析网路层地址来找寻数据链路层地址的一个在网络协议包中极其重要的网络传输协议。</p>
-</blockquote>
-<p>arp，可以通过ip地址，来获取对应IP的MAC地址.<br>不过arp也可以探测当前局域网是否有这个IP。</p>
-<h4 id="arp工具使用"><a href="#arp工具使用" class="headerlink" title="arp工具使用"></a>arp工具使用</h4><p>arp会发一个广播，说，谁拥有某个IP，谁有的话，告诉我一下。</p>
-<p>我们可以通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arp -a</span><br></pre></td></tr></table></figure></p>
-<p>来查看当期arp的缓存表。但是，这个表并不是实时的。如果有一个设备拿到ip之后，并没有通信。在arp表中是找不到这个设备的。<br>并且，在执行这条指令时，本机也不会发起arp广播。只是查询本地的缓存。</p>
-<p>如果, 我想要发起arp广播，用什么方法呢。可以使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arping x.x.x.x</span><br></pre></td></tr></table></figure></p>
-<p>arping会发起arp广播，在局域网内查找是否有该ip。如果有，则会有返回。如果没有，就会timeout。</p>
-<h4 id="arping-和-ping-的区别"><a href="#arping-和-ping-的区别" class="headerlink" title="arping 和 ping 的区别"></a>arping 和 ping 的区别</h4><ol>
-<li>使用的协议不同, ping使用ICMP, arping使用arp</li>
-<li>有些windows配置会禁用ICMP，所以使用ping是没有办法检测设备存在的。</li>
-<li>如果本地的ip地址和你想检测远端的IP地址相同，ping会ping到自己。arping可以检测到远端是否有和你相同IP的设备。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">网络</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">arp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/05/arp初探，以及arp、arping命令使用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1097,7 +1185,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 dangjiahe
+    		&copy; 2021 dangjiahe
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1184,11 +1272,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color1">macos</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">镜像制作</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1197,6 +1285,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">glibc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">镜像制作</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,11 +1308,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">调试</a>
+                <a href="javascript:void(0)" class="js-tag color3">驱动</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">macos</a>
+                <a href="javascript:void(0)" class="js-tag color1">cmake</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">调试</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1228,23 +1324,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">c++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">批处理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">驱动</a>
+                <a href="javascript:void(0)" class="js-tag color1">shell</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">android</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">gdb</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1264,7 +1356,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">cmake</a>
+                <a href="javascript:void(0)" class="js-tag color3">笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">android</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">gdb</a>
               </li>
             
             <div class="clearfix"></div>
