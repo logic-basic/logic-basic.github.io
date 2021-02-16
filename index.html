@@ -166,7 +166,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="https抓包困难"><a href="#https抓包困难" class="headerlink" title="https抓包困难"></a>https抓包困难</h2>
+        <h2 id="https抓包困难"><a href="#https抓包困难" class="headerlink" title="https抓包困难"></a>https抓包困难</h2><p>https是基于tls或ssl的加密应用层协议.<br>如果直接使用wireshake或者tcpdump抓包。那么抓到的就是加密的数据，无法查看具体的逻辑</p>
+<h2 id="charles简介"><a href="#charles简介" class="headerlink" title="charles简介"></a>charles简介</h2><p>Charles是一个具有http/https代理的抓包工具。<br>可以用来设置http代理服务器。并进行http/https的抓包。</p>
+<p>因为tls加密的原因，我们无法直接抓包。但是可以设置代理服务器来进行中间人攻击。<br>Charles便使用的是这种方式。但是中间人攻击的关键在于信任证书，所以我们需要手动操作让系统信任Charles的证书</p>
+<h2 id="charles安装证书"><a href="#charles安装证书" class="headerlink" title="charles安装证书"></a>charles安装证书</h2><p>首先，打开charles，然后在Help -&gt; SSL Proxying -&gt; Install Charles Root Certificate 进行安装</p>
+<p><img src="https://demo-1252736716.cos.ap-shanghai.myqcloud.com/Charles-install.jpg"></p>
+<p>点击之后，会自动跳到钥匙串. 然后找到我们安装的Charles CA证书，双击</p>
+<p><img src="https://demo-1252736716.cos.ap-shanghai.myqcloud.com/Charles-cer.jpg"></p>
+<p>在弹出的窗口中，选择全部信任。信任证书这一步就做好啦。</p>
+<h2 id="charles抓包"><a href="#charles抓包" class="headerlink" title="charles抓包"></a>charles抓包</h2><p>在安装好CA证书之后，就可以进行https抓包了。</p>
+
       
 
       
